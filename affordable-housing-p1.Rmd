@@ -14,6 +14,20 @@ knitr::opts_chunk$set(echo = TRUE)
 We have decided to meet on Wednesdays after class. 
 We will use discord and github to share files and communicate. 
 
-## Question of Interest 
+## Question of interest 
 
-The question we are trying to answer is what is the difference in the proportion of very low income housing that has been produced from 2014 to 2024 and the proportion of middle income housing produced from 2014 to 2024. 
+The question we are trying to answer is what is the difference in the proportion of very low income housing that has been produced from 2014 to 2024 in NYC and the proportion of middle income housing produced from 2014 to 2024 in NYC. 
+
+
+## Link to the data set
+
+
+## Discription of the data 
+
+The data is published on NYC open data and was collected by the Department of Housing Preservation  Development. The Department of Housing Preservation Development generates reports on projects, buildings, and units that began development after January 1, 2014. The key variables are very low income units, middle income units, and project completion date. Each row of data is a different housing project that has been developed since 2014. 
+
+## Outline of the graph 
+
+## Type of inference method
+
+We are using a difference in two population means. Comparing the average number of very low income housing units that are produced each year since 2014 to the average number of middle income housing units produced in each year since 2014. 
