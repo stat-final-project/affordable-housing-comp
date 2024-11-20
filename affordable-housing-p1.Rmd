@@ -14,15 +14,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Group Introduction
 
 We are students taking Stat 240 under Professor Miranda Rintoul.
+
+
 Names :
-Ami Ashish Buch
-Andrew Henrichs
-Indu Konduru
+
+
+- Ami Ashish Buch  
+- Andrew Henrichs  
+- Indu Konduru
+
+
 ## Group meetings
 
--   Meeting Time: Wednesdays after class
+-   Meeting Time: Mondays and Wednesdays after class
 -   Communication Platforms: Discord for real-time communication, GitHub
-    for file sharing and version control
+    for file sharing and version control  
     Github repository : https://github.com/stat-final-project/affordable-housing-comp
 -   Collaboration Strategy: Each member will take primary responsibility
     for specific project sections while ensuring collective
@@ -42,7 +48,7 @@ middle-income housing units developed in NYC from 2014 to 2024?
 
 <https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Project/hq68-rnsi/about_data>
 
-## Discription of the data
+## Description of the data
 
 The data is published on NYC open data and was collected by the
 Department of Housing Preservation Development. The Department of
@@ -56,9 +62,9 @@ Data collection method could be administrative tracking of affordable
 housing development projects and comprehensive documentation of projects
 initiated after January 1, 2014.
 
-The key variables are very low income units, middle income units, and
-project completion date. Each row of data is a different housing project
-that has been developed since 2014.
+The key variables are very low income units (Numerical), middle income units (Numerical), and
+project completion date (Floating Timestamp). Each row of data is a different housing project or preservation project
+that has been developed since 2014. The dataset, unfiltered, has 4634 rows and 19 columns. When filtered into a month-wise aggregation, it has 12 months per year for every year from 2014 to 2024.
 
 ## Outline of the graph
 
@@ -86,6 +92,8 @@ Very Low Income Units per month Middle Income Units per month
 
 Purpose: Show unit production trends over time
 ![Line Chart](linechart.png)
+
+
 ## Type of inference method
 
 We are using a difference in two population proportions. Comparing the
