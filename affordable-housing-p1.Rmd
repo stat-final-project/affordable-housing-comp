@@ -74,14 +74,14 @@ X-axis: Income Categories (Very Low, Middle) Y-axis: Number of Units
 Purpose: Compare absolute number of units by income level Shows visual
 representation of unit distribution
 
-2.  Pie Chart of Unit Proportions
+2.  Split Bar Chart of Unit Proportions 
 
 Slices representing:
 
 Very Low Income Units (%) Middle Income Units (%)
 
 Purpose: Illustrate percentage breakdown of housing units Highlights
-relative proportion of each income category
+relative proportion of each income category ![Bar Chart](Bar Chart.png)
 
 
 3.  Time Series Line Graph
