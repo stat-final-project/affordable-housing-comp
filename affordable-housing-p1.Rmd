@@ -3,31 +3,95 @@ title: "Final Project"
 author: "Ami, Andrew, Indu"
 date: "2024-11-13"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+## Group Introduction
 
-## Group meetings 
+We are students taking Stat 240 under Professor Miranda Rintoul.
+Names :
+Ami Ashish Buch
+Andrew Henrichs
+Indu Konduru
+## Group meetings
 
-We have decided to meet on Wednesdays after class. 
-We will use discord and github to share files and communicate. 
+-   Meeting Time: Wednesdays after class
+-   Communication Platforms: Discord for real-time communication, GitHub
+    for file sharing and version control
+    Github repository : https://github.com/stat-final-project/affordable-housing-comp
+-   Collaboration Strategy: Each member will take primary responsibility
+    for specific project sections while ensuring collective
+    understanding
 
-## Question of interest 
+## Question of interest
 
-The question we are trying to answer is what is the difference in the average number of very low income housing that has been produced from 2014 to 2024 in NYC and the average number of middle income housing produced from 2014 to 2024 in NYC. 
+To investigate housing equity in New York City, we will compare the
+proportion of very low-income and middle-income affordable housing units
+produced between 2014 and 2024.
+
+Specific Question: Is there a statistically significant difference in
+the proportion of very low-income housing units compared to
+middle-income housing units developed in NYC from 2014 to 2024?
 
 ## Link to the data set
 
-https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Project/hq68-rnsi/about_data 
+<https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Project/hq68-rnsi/about_data>
 
-## Discription of the data 
+## Discription of the data
 
-The data is published on NYC open data and was collected by the Department of Housing Preservation  Development. The Department of Housing Preservation Development generates reports on projects, buildings, and units that began development after January 1, 2014. The key variables are very low income units, middle income units, and project completion date. Each row of data is a different housing project that has been developed since 2014. 
+The data is published on NYC open data and was collected by the
+Department of Housing Preservation Development. The Department of
+Housing Preservation Development generates reports on projects,
+buildings, and units that began development after January 1, 2014. These
+datapoints are counted towards either the Housing New York plan
+(1/1/2014 - 12/31/2021) or the Housing our Neighbours: A Blueprint for
+Housing and Homelessness plan (1/1/2022 - present).
 
-## Outline of the graph 
+Data collection method could be administrative tracking of affordable
+housing development projects and comprehensive documentation of projects
+initiated after January 1, 2014.
 
+The key variables are very low income units, middle income units, and
+project completion date. Each row of data is a different housing project
+that has been developed since 2014.
+
+## Outline of the graph
+
+1.  Bar Chart of Housing Units
+
+X-axis: Income Categories (Very Low, Middle) Y-axis: Number of Units
+Purpose: Compare absolute number of units by income level Shows visual
+representation of unit distribution
+
+2.  Pie Chart of Unit Proportions
+
+Slices representing:
+
+Very Low Income Units (%) Middle Income Units (%)
+
+Purpose: Illustrate percentage breakdown of housing units Highlights
+relative proportion of each income category
+
+
+3.  Time Series Line Graph
+
+X-axis: Years (2014-2024) Y-axis: Number of Units Points showing:
+
+Very Low Income Units per month Middle Income Units per month
+
+Purpose: Show unit production trends over time
+![Line Chart](linechart.png)
 ## Type of inference method
 
-We are using a difference in two population means. Comparing the average number of very low income housing units that are produced each year since 2014 to the average number of middle income housing units produced in each year since 2014. 
+We are using a difference in two population proportions. Comparing the
+proportions of two specific income housing unit categories: - Very Low
+Income vs Middle Income units
+
+Our key statistical metrics would be proportions of very low income
+units, proportions of middle income units, z-statistic, p-value,
+confidence intervals.
