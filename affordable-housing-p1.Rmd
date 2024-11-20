@@ -16,10 +16,10 @@ We will use discord and github to share files and communicate.
 
 ## Question of interest 
 
-The question we are trying to answer is what is the difference in the proportion of very low income housing that has been produced from 2014 to 2024 in NYC and the proportion of middle income housing produced from 2014 to 2024 in NYC. 
-
+The question we are trying to answer is what is the difference in the average number of very low income housing that has been produced from 2014 to 2024 in NYC and the average number of middle income housing produced from 2014 to 2024 in NYC. 
 
 ## Link to the data set
+
 https://data.cityofnewyork.us/Housing-Development/Affordable-Housing-Production-by-Project/hq68-rnsi/about_data 
 
 ## Discription of the data 
