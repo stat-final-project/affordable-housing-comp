@@ -1,0 +1,13 @@
+---
+title: "Stat 240 Final Project"
+output: html_document
+date: "2024-12-02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction 
+
+## Background 
