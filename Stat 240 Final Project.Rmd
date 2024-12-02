@@ -1,5 +1,6 @@
 ---
 title: "Stat 240 Final Project"
+author: "Ami, Andrew, Indu"
 output: html_document
 date: "2024-12-02"
 ---
