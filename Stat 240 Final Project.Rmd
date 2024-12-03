@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction 
+Poverty and homelessness have always been prevailing issues in the U.S. and in recent years have become even more prominent issues. Housing prices have been rising and many Americans find it hard to afford housing. Many people ask the question is there anything being done to fix this issue, and many claim that there isn’t enough being done. To answer this question, we will use data from NYC Open Data to compare the number of low-income housing units that are produced to that of middle-income households. In this report we will show that there is a statistically significant difference in the proportions of low-income households and middle-income households that have been produced in New York City since 2014. 
 
 ## Background 
 
