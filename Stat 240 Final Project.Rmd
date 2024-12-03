@@ -14,5 +14,225 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Background 
 
 ## Analysis
+```{r echo = FALSE}
+library(tidyverse)
+
+# Read the CSV
+housing_data <- read_csv("Affordable_Housing_Production_by_Project_20241202.csv")
+
+# Data Preprocessing
+processed_data <- housing_data %>%
+  # Remove rows with NA in key columns
+  drop_na(`Project Start Date`, `Very Low Income Units`, `Middle Income Units`, `Total Units`) %>%
+  # Parse dates using specific format
+  mutate(
+    project_start_date = as.Date(`Project Start Date`, format = "%m/%d/%Y"),
+    project_start_year = year(project_start_date)
+  ) %>%
+  # Filter for 2014-2024 range
+  filter(
+    project_start_year >= 2014 & 
+    project_start_year <= 2024
+  )
+
+# 1. Bar Chart of Housing Units
+bar_chart <- processed_data %>%
+  group_by(project_start_year) %>%
+  summarise(
+    very_low_income = sum(`Very Low Income Units`, na.rm = TRUE),
+    middle_income = sum(`Middle Income Units`, na.rm = TRUE)
+  ) %>%
+  pivot_longer(cols = c(very_low_income, middle_income), 
+               names_to = "income_category", 
+               values_to = "units") %>%
+  ggplot(aes(x = project_start_year, y = units, fill = income_category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Affordable Housing Units by Income Category",
+    x = "Year",
+    y = "Number of Units",
+    fill = "Income Category"
+  ) +
+  theme_minimal()
+
+# 2. Pie Chart of Unit Proportions
+pie_chart_data <- processed_data %>%
+  summarise(
+    very_low_income = sum(`Very Low Income Units`, na.rm = TRUE),
+    middle_income = sum(`Middle Income Units`, na.rm = TRUE)
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "category", values_to = "units")
+
+pie_chart <- pie_chart_data %>%
+  ggplot(aes(x = "", y = units, fill = category)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  labs(
+    title = "Proportion of Housing Units by Income Category",
+    fill = "Income Category"
+  ) +
+  theme_void()
+
+# 3. Time Series Line Graph
+time_series <- processed_data %>%
+  group_by(project_start_year) %>%
+  summarise(
+    very_low_income = sum(`Very Low Income Units`, na.rm = TRUE),
+    middle_income = sum(`Middle Income Units`, na.rm = TRUE)
+  ) %>%
+  pivot_longer(cols = c(very_low_income, middle_income), 
+               names_to = "income_category", 
+               values_to = "units") %>%
+  ggplot(aes(x = project_start_year, y = units, color = income_category, group = income_category)) +
+  geom_line(size = 1) +
+  geom_point() +
+  labs(
+    title = "Housing Units Over Time by Income Category",
+    x = "Year",
+    y = "Number of Units",
+    color = "Income Category"
+  ) +
+  theme_minimal()
+
+# Statistical Analysis
+total_very_low <- sum(processed_data$`Very Low Income Units`, na.rm = TRUE)
+total_middle <- sum(processed_data$`Middle Income Units`, na.rm = TRUE)
+total_units <- sum(processed_data$`Total Units`, na.rm = TRUE)
+
+prop_very_low <- total_very_low / total_units
+prop_middle <- total_middle / total_units
+
+# Two-proportion z-test (manual calculation)
+pooled_prop <- (total_very_low + total_middle) / (2 * total_units)
+se <- sqrt(pooled_prop * (1 - pooled_prop) * (2 / total_units))
+z_stat <- (prop_very_low - prop_middle) / se
+p_value <- 2 * (1 - pnorm(abs(z_stat)))
+
+# Print results
+cat("Two-Proportion Z-Test Results:\n")
+cat("Z-statistic:", z_stat, "\n")
+cat("P-value:", p_value, "\n")
+cat("Proportion of Very Low Income Units:", prop_very_low, "\n")
+cat("Proportion of Middle Income Units:", prop_middle, "\n")
+
+# Optional: Print all 3 plots
+print(bar_chart)
+print(pie_chart)
+print(time_series)
+
+
+```
+
+```{r}
+
+processed_data <- housing_data %>%
+  mutate(
+    project_start_year = as.numeric(str_extract(`Project Start Date`, "\\d{4}")),
+    project_start_month = as.numeric(str_extract(`Project Start Date`, "^\\d+"))
+  ) %>%
+  filter(project_start_year >= 2014 & project_start_year <= 2024)
+
+# Data Preprocessing
+processed_data <- housing_data %>%
+  drop_na(`Project Start Date`, `Very Low Income Units`, `Middle Income Units`, `Total Units`) %>%
+  mutate(
+    project_start_date = as.Date(`Project Start Date`, format = "%m/%d/%Y"),
+    project_start_year = year(project_start_date),
+    project_start_month = month(project_start_date, label = TRUE)
+  ) %>%
+  filter(project_start_year >= 2014 & project_start_year <= 2024)
+
+# Yearwise Analysis
+yearwise_analysis <- processed_data %>%
+  group_by(project_start_year) %>%
+  summarise(
+    very_low_units = sum(`Very Low Income Units`),
+    middle_units = sum(`Middle Income Units`),
+    total_units = sum(`Total Units`),
+    very_low_prop = very_low_units / total_units,
+    middle_prop = middle_units / total_units
+  )
+
+# Monthwise Analysis
+monthwise_analysis <- processed_data %>%
+  group_by(project_start_month) %>%
+  summarise(
+    very_low_units = sum(`Very Low Income Units`),
+    middle_units = sum(`Middle Income Units`),
+    total_units = sum(`Total Units`),
+    very_low_prop = very_low_units / total_units,
+    middle_prop = middle_units / total_units
+  )
+
+# Yearwise Visualization
+yearwise_plot <- yearwise_analysis %>%
+  pivot_longer(cols = c(very_low_units, middle_units), 
+               names_to = "unit_type", 
+               values_to = "units") %>%
+  ggplot(aes(x = project_start_year, y = units, fill = unit_type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Yearly Housing Units by Income Category",
+       x = "Year", y = "Number of Units") +
+  theme_minimal()
+
+# Monthwise Visualization
+monthwise_plot <- monthwise_analysis %>%
+  pivot_longer(cols = c(very_low_units, middle_units), 
+               names_to = "unit_type", 
+               values_to = "units") %>%
+  ggplot(aes(x = project_start_month, y = units, fill = unit_type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Monthly Housing Units by Income Category",
+       x = "Month", y = "Number of Units") +
+  theme_minimal()
+
+# Print analyses and plots
+print(yearwise_analysis)
+print(monthwise_analysis)
+print(yearwise_plot)
+print(monthwise_plot)
+# Yearly Z-Test
+yearly_data <- housing_data %>%
+  mutate(year = as.numeric(str_extract(`Project Start Date`, "\\d{4}"))) %>%
+  filter(year >= 2014 & year <= 2024) %>%
+  group_by(year) %>%
+  summarise(
+    very_low_units = sum(`Very Low Income Units`, na.rm = TRUE),
+    middle_units = sum(`Middle Income Units`, na.rm = TRUE),
+    total_units = sum(`Total Units`, na.rm = TRUE)
+  ) %>%
+  mutate(
+    very_low_prop = very_low_units / total_units,
+    middle_prop = middle_units / total_units,
+    pooled_prop = (very_low_units + middle_units) / (2 * total_units),
+    se = sqrt(pooled_prop * (1 - pooled_prop) * (2 / total_units)),
+    z_stat = (very_low_prop - middle_prop) / se,
+    p_value = 2 * (1 - pnorm(abs(z_stat)))
+  )
+
+# Monthly Z-Test
+monthly_data <- housing_data %>%
+  mutate(month = as.numeric(str_extract(`Project Start Date`, "^\\d+"))) %>%
+  group_by(month) %>%
+  summarise(
+    very_low_units = sum(`Very Low Income Units`, na.rm = TRUE),
+    middle_units = sum(`Middle Income Units`, na.rm = TRUE),
+    total_units = sum(`Total Units`, na.rm = TRUE)
+  ) %>%
+  mutate(
+    very_low_prop = very_low_units / total_units,
+    middle_prop = middle_units / total_units,
+    pooled_prop = (very_low_units + middle_units) / (2 * total_units),
+    se = sqrt(pooled_prop * (1 - pooled_prop) * (2 / total_units)),
+    z_stat = (very_low_prop - middle_prop) / se,
+    p_value = 2 * (1 - pnorm(abs(z_stat)))
+  )
+
+print(yearly_data[, c("year", "very_low_prop", "middle_prop", "z_stat", "p_value")])
+print(monthly_data[, c("month", "very_low_prop", "middle_prop", "z_stat", "p_value")])
+
+
+
+```
 
 ## Discussion 
