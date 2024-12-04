@@ -10,9 +10,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction 
-Poverty and homelessness have always been prevailing issues in the U.S. and in recent years have become even more prominent issues. Housing prices have been rising and many Americans find it hard to afford housing. Many people ask the question is there anything being done to fix this issue, and many claim that there isn’t enough being done. To answer this question, we will use data from NYC Open Data to compare the number of low-income housing units that are produced to that of middle-income households. In this report we will show that there is a statistically significant difference in the proportions of low-income households and middle-income households that have been produced in New York City since 2014. 
+Poverty and homelessness have always been prevailing issues in the U.S. and in recent years have become even more prominent issues. Housing prices have been rising and many Americans find it hard to afford housing. Many people ask the question is there anything being done to fix this issue, and many claim that there isn’t enough being done. To answer this question, we will use data from NYC Open Data to compare the number of low-income housing units that are produced to that of middle-income households. In this report we will show that there is a statistically significant difference in the proportions of low-income households and middle-income households that have been produced in New York City since 2014. Meaning that there are significant efforts being made to help resolve the housing crisis especially for low-income individuals.  
 
 ## Background 
+The dataset we decided to use is published on the NYC Open Data website. The Department of Housing Preservation Development generates reports on projects, buildings, and units that began development after January 1, 2014. Each row of data refers to a different housing project in New York City. The key variables are very low-income units’ middle-income units and project completion date. It is these metrics that we conducted our analysis on. 
 
 ## Analysis
 ```{r echo = FALSE}
