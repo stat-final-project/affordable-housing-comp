@@ -14,9 +14,61 @@ Poverty and homelessness have always been prevailing issues in the U.S. and in r
 
 ## Background 
 The dataset we decided to use is published on the NYC Open Data website. The Department of Housing Preservation Development generates reports on projects, buildings, and units that began development after January 1, 2014. Each row of data refers to a different housing project in New York City. The key variables are very low-income units’ middle-income units and project completion date. It is these metrics that we conducted our analysis on. 
+These datapoints are counted towards either the Housing New York plan
+(1/1/2014 - 12/31/2021) or the Housing our Neighbours: A Blueprint for
+Housing and Homelessness plan (1/1/2022 - present).
+
+Data collection method could be administrative tracking of affordable
+housing development projects and comprehensive documentation of projects
+initiated after January 1, 2014.
+
+The key variables are very low income units (Numerical), middle income units (Numerical), and
+project start date (Floating Timestamp). Each row of data is a different housing project or preservation project
+that has been developed since 2014. The dataset, unfiltered, has 4634 rows and 19 columns. When filtered into a month-wise aggregation, it has 12 months per year for every year from 2014 to 2024.
+
+Some charts to help visualize the data and understand what statistical analysis we could perform.
+
+1.  Bar Chart of Housing Units
+
+X-axis: Income Categories (Very Low, Middle) Y-axis: Number of Units
+Purpose: Compare absolute number of units by income level Shows visual
+representation of unit distribution
+
+2.  Split Bar Chart of Unit Proportions 
+
+Slices representing:
+
+Very Low Income Units (%) Middle Income Units (%)
+
+Purpose: Illustrate percentage breakdown of housing units Highlights
+relative proportion of each income category ![Bar Chart](Bar Chart.png)
+
+
+3.  Time Series Line Graph
+
+X-axis: Years (2014-2024) Y-axis: Number of Units Points showing:
+
+Very Low Income Units per month Middle Income Units per month
+
+Purpose: Show unit production trends over time
+![Line Chart](linechart.png)
 
 ## Analysis
-```{r echo = FALSE}
+
+### Two Proportion Z-Test
+The analysis employs a two-proportion z-test to compare the proportions of Very Low Income and Middle Income housing units over time. The statistical hypothesis test is designed to determine if there are significant differences in the housing unit distributions.
+
+#### Z-Test
+$z = \frac{\hat{p}1 - \hat{p}2}{\sqrt{\hat{p}_{pooled}(1-\hat{p}_{pooled})(\frac{1}{n_1} + \frac{1}{n_2})}}$
+Where:
+
+$\hat{p}_1$ is the proportion of Very Low Income units  
+$\hat{p}_2$ is the proportion of Middle Income units  
+$\hat{p}_{pooled}$ is the pooled proportion  
+$n_1$ and $n_2$ are the total number of units in each category  
+
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
 library(tidyverse)
 
 # Read the CSV
@@ -86,7 +138,7 @@ time_series <- processed_data %>%
                names_to = "income_category", 
                values_to = "units") %>%
   ggplot(aes(x = project_start_year, y = units, color = income_category, group = income_category)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   geom_point() +
   labs(
     title = "Housing Units Over Time by Income Category",
@@ -125,7 +177,34 @@ print(time_series)
 
 ```
 
-```{r}
+
+#### Hypothesis
+
+
+Null Hypothesis (H₀): There is no significant difference in the proportion of Very Low Income units compared to Middle Income units.
+
+- Mathematically: H₀: p₁ = p₂
+(The proportion of Very Low Income units is equal to the proportion of Middle Income units)
+
+
+Alternative Hypothesis (H₁): There is a significant difference in the proportion of Very Low Income units compared to Middle Income units.
+
+- Mathematically: H₁: p₁ ≠ p₂
+(The proportions are statistically different)
+
+#### Findings
+Overall Proportions
+
+- Proportion of Very Low Income Units: 20.74%
+- Proportion of Middle Income Units: 9.21%
+- Z-statistic: 136.80
+- P-value: 0.000 (effectively zero)
+
+Since these findings are very indicative of the existence of a considerable difference in housing projects for middle income and very low income households, we strove to find the nature of this difference. Mainly, we sought to see whether the housing projects started at particular seasons of the year (monthly analysis) and what years was there a stark need for very low income households over middle income households to be constructed.
+
+
+
+```{r echo=FALSE}
 
 processed_data <- housing_data %>%
   mutate(
@@ -189,8 +268,6 @@ monthwise_plot <- monthwise_analysis %>%
   theme_minimal()
 
 # Print analyses and plots
-print(yearwise_analysis)
-print(monthwise_analysis)
 print(yearwise_plot)
 print(monthwise_plot)
 # Yearly Z-Test
@@ -236,6 +313,18 @@ print(monthly_data[, c("month", "very_low_prop", "middle_prop", "z_stat", "p_val
 
 
 ```
+Looking at the results:
+
+Yearly Variations:
+
+- 2017-2020 show extreme differences in proportions
+- 2022 shows the most balanced proportions
+
+
+Monthly Variations:
+
+- March (month 3) shows the most extreme difference
+- July and October show relatively smaller disparities
 
 ## Discussion 
 ### Statistical Significance
