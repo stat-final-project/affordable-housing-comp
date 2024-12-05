@@ -238,3 +238,13 @@ print(monthly_data[, c("month", "very_low_prop", "middle_prop", "z_stat", "p_val
 ```
 
 ## Discussion 
+### Statistical Significance
+The extremely small p-values (0 in most years) indicate that the differences between very-low-income and middle-income housing proportions are not random - they represent real, deliberate policy choices in housing development.  
+
+### Shortcomings
+No information about total housing demand for each income category
+Missing data on actual occupancy rates versus just unit construction
+
+### Additional Questions to consider
+How many people from each income category actually obtained and retained housing?
+How do these numbers compare to other major cities?
