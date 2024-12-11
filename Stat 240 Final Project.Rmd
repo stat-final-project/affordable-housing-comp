@@ -331,9 +331,7 @@ Monthly Variations:
 The extremely small p-values (0 in most years) indicate that the differences between very-low-income and middle-income housing proportions are not random - they represent real, deliberate policy choices in housing development.  
 
 ### Shortcomings
-No information about total housing demand for each income category
-Missing data on actual occupancy rates versus just unit construction
+The data does not account for the total housing demand within each income category, which is crucial for understanding whether the supply of affordable housing meets the actual need. Additionally, the analysis focuses on the number of units constructed, without considering occupancy rates, which could reveal discrepancies between housing availability and actual usage. 
 
 ### Additional Questions to consider
-How many people from each income category actually obtained and retained housing?
-How do these numbers compare to other major cities?
+Future research questions could explore how many people from each income category have successfully obtained and retained housing, as this would offer a clearer picture of the effectiveness of these housing efforts. Additionally, comparing these findings to other major cities would provide a wider context for evaluating the success of New York City when it comes to addressing the housing crisis.
