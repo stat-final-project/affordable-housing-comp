@@ -10,10 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction 
-Poverty and homelessness have always been prevailing issues in the U.S. and in recent years have become even more prominent issues. Housing prices have been rising and many Americans find it hard to afford housing. We wanted to see if there is any evidence that suggest that more low income housing is being produced compared to that of middle income housing. To answer this question, we used data from NYC Open Data to compare the number of very low-income housing units that are produced to that of middle-income households. This will allow us to analyze if there is or isn't a difference in the proportion of very-low income households that have been produced compared to that of middle income households. In this report we will show that there is a statistically significant difference in the proportions of very low-income households and middle-income households that have been produced in New York City since 2014. Meaning that from the evidence there may be efforts being made to help resolve the housing crisis especially for very low-income individuals.  
+Poverty and homelessness have always been prevailing issues in the U.S. and in recent years have become even more prominent issues. Housing prices have been rising and many Americans find it hard to afford housing. We wanted to see if there is any evidence that suggest that more low income housing is being produced compared to that of middle income housing. To answer this question, we used data from NYC Open Data to compare the number of very low-income housing units that are produced to that of middle-income households. This will allow us to analyze if there is or isn't a difference in the proportion of very-low income households that have been produced compared to that of middle income households. There is a far more extensive dataset relating to affordable housing production ranging from 1994 to 2024 provided by OpenDataPhilly, but we chose to choose one that encompasses recent trends. Since the statistical analysis cannot account for or factor in the fluctuations in economy, our results would be remiss. Also, we chose New York City over Philadelphia because we wanted to highlight how New York City continues to be the most unequal large city in the nation measured by the Gini Index. Cosidering these metrics, it is important to note how the government is taking action to solve this disparity.  
+Each row of data refers to a different housing project in New York City.  
+In this report we will show that there is a *statistically significant difference in the proportions of very low-income households and middle-income households that have been produced in New York City since 2014*. Meaning that from the evidence there may be efforts being made to help resolve the housing crisis especially for very low-income individuals. Additionally, after obtaining visible results from the statistical analysis, we further explore the trend of this difference in proportion itself, across years (to explore the temporal trend), and across months (to explore a seasonal trend among months, if any).
 
 ## Background 
-The dataset we decided to use is published on the NYC Open Data website. The Department of Housing Preservation Development generates reports on projects, buildings, and units that began development after January 1, 2014. Each row of data refers to a different housing project in New York City. The key variables are very low-income units’ middle-income units and project completion date. It is these metrics that we conducted our analysis on. 
+The dataset we decided to use is published on the NYC Open Data website. The Department of Housing Preservation Development generates reports on projects, buildings, and units that began development after January 1, 2014. The key variables are very low-income units’ middle-income units and project completion date. It is these metrics that we conducted our analysis on. 
 These datapoints are counted towards either the Housing New York plan
 (1/1/2014 - 12/31/2021) or the Housing our Neighbours: A Blueprint for
 Housing and Homelessness plan (1/1/2022 - present).
@@ -28,15 +30,7 @@ that has been developed since 2014. The dataset, unfiltered, has 4634 rows and 1
 
 Some charts to help visualize the data and understand what statistical analysis we could perform.
 
-1.  Bar Chart of Housing Units
-
-X-axis: Income Categories (Very Low, Middle) Y-axis: Number of Units
-Purpose: Compare absolute number of units by income level Shows visual
-representation of unit distribution
-
-2.  Split Bar Chart of Unit Proportions 
-
-Slices representing:
+1.  Split Bar Chart of Unit Proportions 
 
 Very Low Income Units (%) Middle Income Units (%)
 
@@ -44,7 +38,7 @@ Purpose: Illustrate percentage breakdown of housing units Highlights
 relative proportion of each income category ![Bar Chart](Bar Chart.png)
 
 
-3.  Time Series Line Graph
+2.  Time Series Line Graph
 
 X-axis: Years (2014-2024) Y-axis: Number of Units Points showing:
 
@@ -313,8 +307,8 @@ print(monthly_data[, c("month", "very_low_prop", "middle_prop", "z_stat", "p_val
 
 
 ```
-Looking at the results:
 
+#### Findings
 Yearly Variations:
 
 - 2017-2020 show extreme differences in proportions
@@ -331,7 +325,9 @@ Monthly Variations:
 The extremely small p-values (0 in most years) indicate that the differences between very-low-income and middle-income housing proportions are not random - they represent real, deliberate policy choices in housing development.  
 
 ### Shortcomings
-The data does not account for the total housing demand within each income category, which is crucial for understanding whether the supply of affordable housing meets the actual need. Additionally, the analysis focuses on the number of units constructed, without considering occupancy rates, which could reveal discrepancies between housing availability and actual usage. 
+A two proportion z test assumes that the proportions under consideration are independent of each other, whereas the proportions under consideration are from the same sample set; we merely simulated 2 independent dataset. We might use statistical methods catering more towards dependent proportions after learning them.  
+The data does not account for the total housing demand within each income category, which is crucial for understanding whether the supply of affordable housing meets the actual need. Additionally, the analysis focuses on the number of units constructed, without considering occupancy rates, which could reveal discrepancies between housing availability and actual usage.  
+Also, the data does not include the exact numerical incomes that are categorized into very low income and middle income respectively.  
 
 ### Additional Questions to consider
 Future research questions could explore how many people from each income category have successfully obtained and retained housing, as this would offer a clearer picture of the effectiveness of these housing efforts. Additionally, comparing these findings to other major cities would provide a wider context for evaluating the success of New York City when it comes to addressing the housing crisis.
